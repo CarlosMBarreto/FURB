@@ -10,6 +10,7 @@ public class Exe1009 {
 
             final double comissao = 15.0 / 100;
 
+            @SuppressWarnings("unused")
             String nome = sc.nextLine();
 
             double salarioFixo = sc.nextDouble();

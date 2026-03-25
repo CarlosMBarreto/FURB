@@ -8,9 +8,11 @@ public class Exe1010 {
 
         try (Scanner sc = new Scanner(System.in)) {
 
+            @SuppressWarnings("unused")
             int codigoP1 = sc.nextInt(), numeroPecasP1 = sc.nextInt();
             double precoUnidadeP1 = sc.nextDouble();
 
+            @SuppressWarnings("unused")
             int codigoP2 = sc.nextInt(), numeroPecasP2 = sc.nextInt();
             double precoUnidadeP2 = sc.nextDouble();
 
