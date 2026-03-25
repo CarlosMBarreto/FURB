@@ -1,4 +1,4 @@
-package CienciaDaComputacao.IntroducaoProgramacao.list5;
+package list5;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class Uni4Exe07 {
             System.out.print("Peso da carta:");
             double pesoGramas = sc.nextDouble();
 
-            double valorPagar = 0;
+            double valorPagar;
 
             if(pesoGramas > 50){
                 double pesoExcedido = pesoGramas - 50;

@@ -1,4 +1,4 @@
-package CienciaDaComputacao.IntroducaoProgramacao.list5;
+package list5;
 
 import java.util.Scanner;
 
