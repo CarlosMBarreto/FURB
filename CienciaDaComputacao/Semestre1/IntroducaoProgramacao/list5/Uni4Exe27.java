@@ -48,12 +48,20 @@ public class Uni4Exe27 {
 
                 double preco;
 
-                if (horas <= 2) {
-                    preco = horas * 5.0;
-                } else if (horas > 2 && horas < 5) {
-                    preco = horas * 7.5;
-                } else {
-                    preco = horas * 10.0;
+                switch (horas) {
+                    case 1:
+                    case 2:
+                        preco = horas * 5.0;
+                        break;
+
+                    case 3:
+                    case 4:
+                        preco = horas * 7.5;
+                        break;
+
+                    default:
+                        preco = horas * 10.0;
+                        break;
                 }
 
                 System.out.printf("Preço cobrado = R$%.2f\n", preco);
