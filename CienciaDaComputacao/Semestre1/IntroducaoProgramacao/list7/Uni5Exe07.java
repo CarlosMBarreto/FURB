@@ -22,8 +22,8 @@ public class Uni5Exe07 {
                     menor = numero;
                 }
             }
-            System.out.println("Maior número: " + maior);
-            System.out.println("Menor número: " + menor);
+            System.out.printf("Maior número: %.2f", maior);
+            System.out.printf("\nMenor número: %.2f", menor);
         }
     }
 }
