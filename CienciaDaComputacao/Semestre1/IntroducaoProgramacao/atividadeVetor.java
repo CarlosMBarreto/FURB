@@ -1,5 +1,7 @@
 package CienciaDaComputacao.Semestre1.IntroducaoProgramacao;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class atividadeVetor {
@@ -9,7 +11,7 @@ public class atividadeVetor {
         try (Scanner sc = new Scanner(System.in)) {
 
             String nomeAlunos[] = new String[3];
-            double notaAlunos[] = new double[3];
+            Double notaAlunos[] = new Double[3];
             String aprovados = "";
             String reprovados = "";
             double maiorNota = Double.MIN_VALUE;
@@ -31,12 +33,13 @@ public class atividadeVetor {
 
                     mediaAluno += notaAlunos[n];
 
-                    if(notaAlunos[n] > maiorNota){
+                    if (notaAlunos[n] > maiorNota) {
                         maiorNota = notaAlunos[n];
                     }
-                    if(notaAlunos[n] < menorNota){
+                    if (notaAlunos[n] < menorNota) {
                         menorNota = notaAlunos[n];
                     }
+                    Arrays.sort(notaAlunos, Collections.reverseOrder());
                 }
 
                 mediaAluno = mediaAluno / 3;
@@ -53,6 +56,7 @@ public class atividadeVetor {
             System.out.println("Maior nota: " + maiorNota);
             System.out.println("Menor nota: " + menorNota);
             System.out.println("---Ordem de nota---\n" + reprovados);
+            System.out.println(notaAlunos);
         }
     }
 }
