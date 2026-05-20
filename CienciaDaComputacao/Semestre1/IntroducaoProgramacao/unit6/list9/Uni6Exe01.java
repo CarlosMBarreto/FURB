@@ -28,7 +28,7 @@ public class Uni6Exe01 {
         System.out.print("Matriz diagonal principal: ");
         for (int lin = 0; lin < matriz.length; lin++) {
             for (int col = 0; col < matriz[lin].length; col++) {
-                if (matriz[lin] == matriz[col]) {
+                if (lin == col) {
                     System.out.print("[" + matriz[lin][col] + "]");
                 }
             }
