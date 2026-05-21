@@ -72,11 +72,9 @@ public class Uni6Exe04 {
 
         System.out.println("\nMaior salario: " + maior);
 
-        System.out.println("Departamento: "
-                + (departamento + 1));
+        System.out.println("Departamento: " + (departamento + 1));
 
-        System.out.println("Funcionario: "
-                + (funcionario + 1));
+        System.out.println("Funcionario: " + (funcionario + 1));
     }
 
     public static void mediaDepartamentos(double matriz[][]) {
@@ -92,8 +90,7 @@ public class Uni6Exe04 {
 
             double media = soma / matriz[lin].length;
 
-            System.out.println("Media departamento "
-                    + (lin + 1) + ": " + media);
+            System.out.println("Media departamento " + (lin + 1) + ": " + media);
         }
     }
 
@@ -128,7 +125,6 @@ public class Uni6Exe04 {
 
         System.out.println("Media geral: " + mediaGeral);
 
-        System.out.println("Funcionarios acima da media: "
-                + acima);
+        System.out.println("Funcionarios acima da media: " + acima);
     }
 }
