@@ -119,41 +119,24 @@ public class Uni6Exe05 {
 
     public static boolean verificarVencedor(String velha[][]) {
 
-        if (!velha[0][0].equals(" ")
-                && velha[0][0].equals(velha[0][1])
-                && velha[0][1].equals(velha[0][2])) {
-            return true;
+        for (int lin = 0; lin < velha.length; lin++) {
+
+            if (!velha[lin][0].equals(" ")
+                    && velha[lin][0].equals(velha[lin][1])
+                    && velha[lin][1].equals(velha[lin][2])) {
+                return true;
+            }
         }
 
-        if (!velha[1][0].equals(" ")
-                && velha[1][0].equals(velha[1][1])
-                && velha[1][1].equals(velha[1][2])) {
-            return true;
+        for (int col = 0; col < velha[0].length; col++) {
+
+            if (!velha[0][col].equals(" ")
+                    && velha[0][col].equals(velha[1][col])
+                    && velha[1][col].equals(velha[2][col])) {
+                return true;
+            }
         }
 
-        if (!velha[2][0].equals(" ")
-                && velha[2][0].equals(velha[2][1])
-                && velha[2][1].equals(velha[2][2])) {
-            return true;
-        }
-
-        if (!velha[0][0].equals(" ")
-                && velha[0][0].equals(velha[1][0])
-                && velha[1][0].equals(velha[2][0])) {
-            return true;
-        }
-
-        if (!velha[0][1].equals(" ")
-                && velha[0][1].equals(velha[1][1])
-                && velha[1][1].equals(velha[2][1])) {
-            return true;
-        }
-
-        if (!velha[0][2].equals(" ")
-                && velha[0][2].equals(velha[1][2])
-                && velha[1][2].equals(velha[2][2])) {
-            return true;
-        }
         if (!velha[0][0].equals(" ")
                 && velha[0][0].equals(velha[1][1])
                 && velha[1][1].equals(velha[2][2])) {
