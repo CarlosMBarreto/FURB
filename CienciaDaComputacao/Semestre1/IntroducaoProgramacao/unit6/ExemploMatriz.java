@@ -41,6 +41,7 @@ public class ExemploMatriz {
 
         int mediaGeral = somaGeral / (notas.length * notas[0].length);
         System.out.println("A média geral da turma é: " + mediaGeral);
+        sc.close();
     }
 
 }

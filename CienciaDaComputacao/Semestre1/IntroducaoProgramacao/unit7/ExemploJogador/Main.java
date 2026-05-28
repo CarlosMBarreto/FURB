@@ -20,7 +20,7 @@ public class Main {
             menu = sc.nextInt();
 
             switch (menu) {
-                
+
                 case 1:
                     System.out.print("Digite a posição do jogador: ");
                     int posicao = sc.nextInt();
@@ -43,5 +43,6 @@ public class Main {
             }
 
         } while (menu != 0);
+        sc.close();
     }
 }
