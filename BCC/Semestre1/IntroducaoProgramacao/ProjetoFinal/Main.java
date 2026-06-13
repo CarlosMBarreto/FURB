@@ -1,8 +1,7 @@
-package BCC.Semestre1.IntroducaoProgramacao.ProjetoFinal;
-
-import java.util.Scanner;
+package ProjetoFinal;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
@@ -15,10 +14,11 @@ public class Main {
         int opcao = 0;
 
         do {
-            System.out.println("   === MENU ===\n");
+            System.out.println("   === MENU ===");
             System.out.println("1 - Visualizar sala");
             System.out.println("2 - Comprar ingresso");
-            System.out.println("3 - Sair");
+            System.out.println("3 - Resumo");
+            System.out.println("0 - Encerrar");
             System.out.print("Opção: ");
             opcao = sc.nextInt();
 
@@ -27,7 +27,28 @@ public class Main {
                     mostrarSala(sala);
                     break;
 
+                case 2:
+                    System.out.print("Fila: ");
+                    int fila = sc.nextInt();
+
+                    System.out.print("Poltrona: ");
+                    int poltrona = sc.nextInt();
+
+                    System.out.print("Tipo: [1]Inteira - [2]Meia: ");
+                    int tipo = sc.nextInt();
+
+                    
+                    break;
+
+                case 3:
+                    break;
+
+                case 0:
+                    System.out.println("Encerrando...");
+                    break;
+
                 default:
+                    System.out.println("Opção Incorreta.");
                     break;
             }
         } while (opcao != 0);
@@ -39,12 +60,16 @@ public class Main {
         Random rand = new Random();
 
         int preenchidos = 0;
+        int ingressosVendidos = 0;
+        double bilheteria = 150.6789;
+        int ocupacao = 0;
 
-        char linha[] = { 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A' };
+        System.out.println("===== Cine Campus - Totem de autoatendimento =====");
+        System.out.print("Ingressos vendidos: " + ingressosVendidos + "\t");
+        System.out.printf("Bilheteria: %.2f", bilheteria);
+        System.out.println("\tOcupação: " + ocupacao + "%");
 
-        System.out.println("       === Cine Campus ===");
-
-        System.out.println("   0  1  2  3  4  5  6  7  8  9");
+        System.out.println("  0  1  2  3  4  5  6  7  8  9");
 
         for (int i = 0; i < sala.length; i++) {
             for (int j = 0; j < sala[i].length; j++) {
@@ -63,7 +88,7 @@ public class Main {
         }
 
         for (int i = 0; i < sala.length; i++) {
-            System.out.print(linha[i] + " ");
+            System.out.print(i);
             for (int j = 0; j < sala[i].length; j++) {
                 if (!sala[i][j].equals("#")) {
                     System.out.print("[" + "-" + "]");
@@ -73,6 +98,6 @@ public class Main {
             }
             System.out.println();
         }
-        System.out.println("  ------------ TELA ------------  \n\n");
+        System.out.println(" ------------ TELA ------------  \n\n");
     }
 }
