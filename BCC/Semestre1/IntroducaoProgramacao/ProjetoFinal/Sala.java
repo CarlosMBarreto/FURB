@@ -51,51 +51,49 @@ public class Sala {
 
     public boolean posicaoValida(int fileira, int coluna) {
         if (fileira < 0 || fileira >= assentos.length) {
-            System.out.println("Fora do limite.");
+            System.out.println("Fora do limite.(fileira)");
             return false;
-        } else if (coluna < 0 || coluna >= assentos[0].length) {
-            System.out.println("Fora do limite.");
+        }
+        if (coluna < 0 || coluna >= assentos[0].length) {
+            System.out.println("Fora do limite.(coluna)");
             return false;
-        } else if (assentos[fileira][coluna]) {
+        }
+        if (assentos[fileira][coluna]) {
+            System.out.println("Poltrona ocupada.");
             return false;
         }
         return true;
     }
 
     public void reservar(int fileira, int coluna, int tipo, Scanner sc) {
-        if (posicaoValida(fileira, coluna)) {
-            if (assentos[fileira][coluna]) {
-                System.out.println("Assento já ocupado!");
+        if (!posicaoValida(fileira, coluna)) {
+            double preco = calcularPreco(fileira, tipo);
+
+            String setor = "";
+
+            char r;
+
+            if (fileira >= 0 && fileira < 2) {
+                setor = "Poltrona(frente)";
+            } else if (fileira >= 2 && fileira < 8) {
+                setor = "Poltrona(meio)";
+            } else if (fileira >= 8 && fileira <= 9) {
+                setor = "Poltrona(VIP)";
+            }
+
+            System.out.println(setor);
+            System.out.printf("Valor: R$ %.2f\n", preco);
+            System.out.print("Confirmar? (S/N): ");
+            r = sc.next().toUpperCase().charAt(0);
+
+            if (r == 'S') {
+                assentos[fileira][coluna] = true;
+                System.out.println("Compra realizada!");
+                bilheteria += preco;
             } else {
-                double preco = calcularPreco(fileira, tipo);
-
-                String setor = "";
-
-                char r;
-
-                if (fileira >= 0 && fileira < 2) {
-                    setor = "Poltrona(frente)";
-                } else if (fileira >= 2 && fileira < 8) {
-                    setor = "Poltrona(meio)";
-                } else if (fileira >= 8 && fileira <= 9) {
-                    setor = "Poltrona(VIP)";
-                }
-
-                System.out.println(setor);
-                System.out.printf("Valor: R$ %.2f\n", preco);
-                System.out.println("Confirmar? (S/N): ");
-                r = sc.next().toUpperCase().charAt(0);
-
-                if (r == 'S') {
-                    assentos[fileira][coluna] = true;
-                    System.out.println("Compra realizada!");
-                    bilheteria += preco;
-                } else {
-                    System.out.println("Reserva cancelada.");
-                }
+                System.out.println("Reserva cancelada.");
             }
         }
-
     }
 
     public double percentualOcupacao() {
@@ -166,10 +164,10 @@ public class Sala {
     public void resumo() {
         double ocupacao = percentualOcupacao();
 
-        System.out.println("=== RESUMO ===");
+        System.out.println("\n\t===== RESUMO =====");
         System.out.println("Ingressos vendidos: " + ingressosVendidos());
         System.out.printf("Bilheteria: R$ %.2f\n", getBilheteria());
         System.out.printf("Ocupação: %.2f%%\n", ocupacao);
-        System.out.println(classificacao(ocupacao));
+        System.out.println(classificacao(ocupacao) + "\n");
     }
 }

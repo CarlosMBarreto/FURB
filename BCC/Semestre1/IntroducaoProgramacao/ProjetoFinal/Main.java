@@ -15,7 +15,7 @@ public class Main {
         int opcao = 0;
 
         do {
-            System.out.println("   === MENU ===");
+            System.out.println("\t===== MENU =====");
             System.out.println("1 - Visualizar sala");
             System.out.println("2 - Comprar ingresso");
             System.out.println("3 - Resumo");
@@ -38,9 +38,7 @@ public class Main {
                     System.out.print("Poltrona: ");
                     int poltrona = sc.nextInt();
 
-                    if (!sala.posicaoValida(fila, poltrona)) {
-                        System.out.println("Poltrona ocupada ou fora do limite.");
-                    } else {
+                    if (sala.posicaoValida(fila, poltrona)) {
                         System.out.print("Tipo - Inteira[1] / Meia[2]: ");
                         int tipo = sc.nextInt();
 
@@ -70,5 +68,8 @@ public class Main {
         {
             System.out.println("Sessão lotada!");
         }
+
+        sala.exibirSala();
+        sala.resumo();
     }
 }
