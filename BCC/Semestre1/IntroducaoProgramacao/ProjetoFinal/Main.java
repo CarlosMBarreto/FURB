@@ -38,7 +38,9 @@ public class Main {
                     System.out.print("Poltrona: ");
                     int poltrona = sc.nextInt();
 
-                    if (sala.posicaoValida(fila, poltrona)) {
+                    if (!sala.posicaoValida(fila, poltrona)) {
+                        System.out.println("Poltrona ocupada ou fora do limite.");
+                    } else {
                         System.out.print("Tipo - Inteira[1] / Meia[2]: ");
                         int tipo = sc.nextInt();
 
@@ -63,7 +65,9 @@ public class Main {
                     break;
             }
         } while (opcao != 0 && sala.ingressosVendidos() < 85);
-        if (sala.ingressosVendidos() == 85) {
+        if (sala.ingressosVendidos() == 85)
+
+        {
             System.out.println("Sessão lotada!");
         }
     }

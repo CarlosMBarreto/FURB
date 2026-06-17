@@ -56,6 +56,8 @@ public class Sala {
         } else if (coluna < 0 || coluna >= assentos[0].length) {
             System.out.println("Fora do limite.");
             return false;
+        } else if (assentos[fileira][coluna]) {
+            return false;
         }
         return true;
     }
@@ -78,7 +80,6 @@ public class Sala {
                 } else if (fileira >= 8 && fileira <= 9) {
                     setor = "Poltrona(VIP)";
                 }
-
 
                 System.out.println(setor);
                 System.out.printf("Valor: R$ %.2f\n", preco);
