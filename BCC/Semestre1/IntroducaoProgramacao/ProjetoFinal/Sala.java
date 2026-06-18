@@ -50,12 +50,8 @@ public class Sala {
     }
 
     public boolean posicaoValida(int fileira, int coluna) {
-        if (fileira < 0 || fileira >= assentos.length) {
-            System.out.println("Fora do limite.(fileira)");
-            return false;
-        }
-        if (coluna < 0 || coluna >= assentos[0].length) {
-            System.out.println("Fora do limite.(coluna)");
+        if ((fileira < 0 || fileira >= assentos.length) || (coluna < 0 || coluna >= assentos[0].length)) {
+            System.out.println("Fora do limite.");
             return false;
         }
         if (assentos[fileira][coluna]) {
@@ -66,33 +62,32 @@ public class Sala {
     }
 
     public void reservar(int fileira, int coluna, int tipo, Scanner sc) {
-        if (!posicaoValida(fileira, coluna)) {
-            double preco = calcularPreco(fileira, tipo);
 
-            String setor = "";
+        double preco = calcularPreco(fileira, tipo);
 
-            char r;
+        String setor = "";
 
-            if (fileira >= 0 && fileira < 2) {
-                setor = "Poltrona(frente)";
-            } else if (fileira >= 2 && fileira < 8) {
-                setor = "Poltrona(meio)";
-            } else if (fileira >= 8 && fileira <= 9) {
-                setor = "Poltrona(VIP)";
-            }
+        char r;
 
-            System.out.println(setor);
-            System.out.printf("Valor: R$ %.2f\n", preco);
-            System.out.print("Confirmar? (S/N): ");
-            r = sc.next().toUpperCase().charAt(0);
+        if (fileira >= 0 && fileira < 2) {
+            setor = "Poltrona(frente)";
+        } else if (fileira >= 2 && fileira < 8) {
+            setor = "Poltrona(meio)";
+        } else if (fileira >= 8 && fileira <= 9) {
+            setor = "Poltrona(VIP)";
+        }
 
-            if (r == 'S') {
-                assentos[fileira][coluna] = true;
-                System.out.println("Compra realizada!");
-                bilheteria += preco;
-            } else {
-                System.out.println("Reserva cancelada.");
-            }
+        System.out.println(setor);
+        System.out.printf("Valor: R$ %.2f\n", preco);
+        System.out.print("Confirmar? (S/N): ");
+        r = sc.next().toUpperCase().charAt(0);
+
+        if (r == 'S') {
+            assentos[fileira][coluna] = true;
+            System.out.println("Compra realizada!");
+            bilheteria += preco;
+        } else {
+            System.out.println("Reserva cancelada.");
         }
     }
 
