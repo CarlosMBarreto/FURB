@@ -5,6 +5,6 @@ public class Pessoa {
     double peso;
 
     double calcularImc() {
-        return peso / Math.pow(altura, 2);
+        return peso / (altura * altura);
     }
 }

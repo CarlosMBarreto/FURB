@@ -1,4 +1,4 @@
-package BCC.Semestre2.POO.Unit1.list1.Ex1;
+package BCC.Semestre2.POO.Unit1.list1.Ex3;
 
 public class Pessoa {
     double altura;
