@@ -28,10 +28,40 @@ public class Main {
             opcao = sc.nextInt();
             switch (opcao) {
                 case 1:
-
+                    cadastrarArtista();
                     break;
+
+                case 2:
+                    cadastrarAlbum();
+                    break;
+
+                case 3:
+                    cadastrarMusica();
+                    break;
+
+                case 4:
+                    cadastrarPlaylist();
+                    break;
+
+                case 5:
+                    cadastrarUsuario();
+                    break;
+
+                case 6:
+                    adicionarMusicaEmPlaylist();
+                    break;
+
+                case 7:
+                    adicionarPlaylistEmUsuario();
+                    break;
+
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+
                 default:
                     System.out.println("Opção inválida.");
+                    break;
             }
         } while (opcao != 0);
     }
@@ -89,9 +119,97 @@ public class Main {
         }
     }
 
+    private static void cadastrarMusica() {
+        if (totalMusicas >= musicas.length) {
+            System.out.println("Total de músicas atingidas.");
+        } else {
+            System.out.print("Titulo da música: ");
+            String tituloMusica = sc.next();
+
+            System.out.print("Minutos da música: ");
+            int minutosMusica = sc.nextInt();
+
+            System.out.print("Titulo da música: ");
+            int segundosMusica = sc.nextInt();
+
+            Artista artista = escolherArtista();
+
+            Album album = escolherAlbum();
+
+            Musica musica = new Musica(tituloMusica, minutosMusica, segundosMusica, artista, album);
+
+            musicas[totalMusicas] = musica;
+            totalMusicas++;
+
+            System.out.println("Musica cadastrada com sucesso.");
+        }
+    }
+
+    public static void cadastrarPlaylist() {
+        if (totalPlaylists >= playlists.length) {
+            System.out.println("Total de playlists atingidas.");
+        } else {
+            System.out.print("Nome da playlist:");
+            String nomePlaylist = sc.next();
+
+            Playlist playlist = new Playlist(nomePlaylist);
+
+            playlists[totalPlaylists] = playlist;
+            totalPlaylists++;
+        }
+        System.out.println("Playlist cadastrada com sucesso.");
+    }
+
+    public static void cadastrarUsuario() {
+        if (totalUsuarios >= usuarios.length) {
+            System.out.println("Total de usuarios atingidos.");
+        } else {
+            System.out.print("Nome do Usuario:");
+            String nomeUsuario = sc.next();
+
+            System.out.print("Email:");
+            String emailUsuario = sc.next();
+
+            Usuario usuario = new Usuario(nomeUsuario, emailUsuario);
+
+            usuarios[totalUsuarios] = usuario;
+            totalUsuarios++;
+        }
+        System.out.println("Usuario cadastrado com sucesso.");
+    }
+
+    private static void adicionarMusicaEmPlaylist() {
+
+        Playlist playlist = escolherPlaylist();
+
+        Musica musica = escolherMusica();
+
+        boolean sucesso = playlist.adicionarMusica(musica);
+
+        if (sucesso) {
+            System.out.println("Música adicionada na playlist.");
+        } else {
+            System.out.println("A playlist ja esta cheia.");
+        }
+    }
+
+    private static void adicionarPlaylistEmUsuario() {
+        Usuario usuario = escolheUsuario();
+
+        Playlist playlist = escolherPlaylist();
+
+        boolean sucesso = usuario.adicionarPlaylist(playlist);
+
+        if (sucesso) {
+            System.out.println("Playlist adicionada no usuário.");
+        } else {
+            System.out.println("O usuário ja atingiu o limite de playlists.");
+        }
+    }
+
     private static Artista escolherArtista() {
-        System.out.println("--- Artistas disponiveis ---");
-        for (int i = 0; i < artistas.length; i++) {
+        System.out.println("--- Artistas ---");
+        for (int i = 0; i < totalArtistas; i++) {
             System.out.println("ID: " + artistas[i].getIdArtista() + " - " + artistas[i].getNomeArtista());
         }
 
@@ -103,6 +221,78 @@ public class Main {
             }
         }
         System.out.println("Artista não encontrado.");
+        return null;
+    }
+
+    private static Album escolherAlbum() {
+        System.out.println("--- Albuns ---");
+        for (int i = 0; i < totalAlbuns; i++) {
+            System.out.println("ID: " + albuns[i].getIdAlbum() + " - " + albuns[i].getNomeAlbum());
+        }
+
+        System.out.println("Digite o ID do album: ");
+        int id = sc.nextInt();
+        for (int i = 0; i < totalAlbuns; i++) {
+            if (albuns[i].getIdAlbum() == id) {
+                return albuns[i];
+            }
+        }
+
+        System.out.println("Album não encontrado.");
+        return null;
+    }
+
+    private static Musica escolherMusica() {
+        System.out.println("--- Músicas ---");
+        for (int i = 0; i < totalMusicas; i++) {
+            System.out.println("ID: " + musicas[i].getIdMusica() + " - " + musicas[i].getTituloMusica());
+        }
+
+        System.out.print("Digite o ID da música: ");
+        int id = sc.nextInt();
+        for (int i = 0; i < totalMusicas; i++) {
+            if (musicas[i].getIdMusica() == id) {
+                return musicas[i];
+            }
+        }
+
+        System.out.println("Música não encontrada.");
+        return null;
+    }
+
+    private static Playlist escolherPlaylist() {
+        System.out.println("--- Playlists ---");
+        for (int i = 0; i < totalPlaylists; i++) {
+            System.out.println("ID: " + playlists[i].getIdPlaylist() + " - " + playlists[i].getNomePlaylist());
+        }
+
+        System.out.print("Digite o ID da playlist: ");
+        int id = sc.nextInt();
+        for (int i = 0; i < totalPlaylists; i++) {
+            if (playlists[i].getIdPlaylist() == id) {
+                return playlists[i];
+            }
+        }
+
+        System.out.println("Playlist não encontrada.");
+        return null;
+    }
+
+    private static Usuario escolheUsuario() {
+        System.out.println("--- Usuarios ---");
+        for (int i = 0; i < totalUsuarios; i++) {
+            System.out.println("ID: " + usuarios[i].getIdUsuario() + " - " + usuarios[i].getNomeUsuario());
+        }
+
+        System.out.print("Digite o ID do usuário: ");
+        int id = sc.nextInt();
+        for (int i = 0; i < totalUsuarios; i++) {
+            if (usuarios[i].getIdUsuario() == id) {
+                return usuarios[i];
+            }
+        }
+
+        System.out.println("Usuário não encontrado.");
         return null;
     }
 }

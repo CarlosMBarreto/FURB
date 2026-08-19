@@ -1,3 +1,4 @@
+
 public class Musica {
 
     private static int contadorId = 1;
@@ -6,23 +7,16 @@ public class Musica {
     private String tituloMusica;
     private int minutos;
     private int segundos;
-    private String letraMusica;
     private Artista artista;
     private Album album;
 
-    public Musica(String tituloMusica, int minutos, int segundos, String letraMusica,
-                  Artista artista, Album album) {
+    public Musica(String tituloMusica, int minutos, int segundos, Artista artista, Album album) {
         this.idMusica = contadorId++;
         this.tituloMusica = tituloMusica;
         this.minutos = minutos;
         this.segundos = segundos;
-        this.letraMusica = letraMusica;
         this.artista = artista;
         this.album = album;
-    }
-
-    public Musica(String tituloMusica, int minutos, int segundos, Artista artista, Album album) {
-        this(tituloMusica, minutos, segundos, "Letra não cadastrada", artista, album);
     }
 
     public int getIdMusica() {
@@ -51,14 +45,6 @@ public class Musica {
 
     public void setSegundos(int segundos) {
         this.segundos = segundos;
-    }
-
-    public String getLetraMusica() {
-        return letraMusica;
-    }
-
-    public void setLetraMusica(String letraMusica) {
-        this.letraMusica = letraMusica;
     }
 
     public Artista getArtista() {
