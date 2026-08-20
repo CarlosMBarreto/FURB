@@ -1,77 +1,72 @@
 public class Playlist {
 
-    private static int contadorId = 1;
+    private static final int CAPACIDADE = 100;
 
-    private int idPlaylist;
-    private String nomePlaylist;
-    private Musica[] musicas = new Musica[50];
-    private int quantidadeAtual;
-    private int posicaoAtual;
+    private String nome;
+    private Usuario dono;
+    private Musica[] musicas = new Musica[CAPACIDADE];
+    private int quantidade;
 
-    public Playlist(String nomePlaylist) {
-        this.idPlaylist = contadorId++;
-        this.nomePlaylist = nomePlaylist;
-        this.quantidadeAtual = 0;
-        this.posicaoAtual = -1;
+    public Playlist(String nome, Usuario dono) {
+        this.nome = nome;
+        this.dono = dono;
+        this.quantidade = 0;
     }
 
-    public boolean adicionarMusica(Musica musica) {
-        if (quantidadeAtual >= musicas.length) {
+    public String getNome() {
+        return nome;
+    }
+
+    public Usuario getDono() {
+        return dono;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public boolean adicionar(Musica musica) {
+        if (musica == null) {
             return false;
         }
-        musicas[quantidadeAtual] = musica;
-        quantidadeAtual++;
+        if (quantidade >= CAPACIDADE) {
+            return false;
+        }
+        musicas[quantidade] = musica;
+        quantidade++;
         return true;
     }
 
-    public Musica getMusicaAtual() {
-        if (posicaoAtual < 0 || posicaoAtual >= quantidadeAtual) {
+    public Musica getNaPosicao(int indice) {
+        if (indice < 0 || indice >= quantidade) {
             return null;
         }
-        return musicas[posicaoAtual];
+        return musicas[indice];
     }
 
-    public Musica proximaMusica() {
-        if (quantidadeAtual == 0) {
-            return null;
+    public boolean removerNaPosicao(int indice) {
+        if (indice < 0 || indice >= quantidade) {
+            return false;
         }
-        if (posicaoAtual < quantidadeAtual - 1) {
-            posicaoAtual++;
+        for (int i = indice; i < quantidade - 1; i++) {
+            musicas[i] = musicas[i + 1];
         }
-        return getMusicaAtual();
+        musicas[quantidade - 1] = null;
+        quantidade--;
+        return true;
     }
 
-    public Musica musicaAnterior() {
-        if (quantidadeAtual == 0) {
-            return null;
+    public int getDuracaoTotalSegundos() {
+        int total = 0;
+        for (int i = 0; i < quantidade; i++) {
+            total += musicas[i].getDuracaoSegundos();
         }
-        if (posicaoAtual > 0) {
-            posicaoAtual--;
+        return total;
+    }
+
+    public void reproduzirTudo() {
+        for (int i = 0; i < quantidade; i++) {
+            musicas[i].reproduzir();
         }
-        return getMusicaAtual();
-    }
-
-    public int getIdPlaylist() {
-        return idPlaylist;
-    }
-
-    public String getNomePlaylist() {
-        return nomePlaylist;
-    }
-
-    public void setNomePlaylist(String nomePlaylist) {
-        this.nomePlaylist = nomePlaylist;
-    }
-
-    public Musica[] getMusicas() {
-        return musicas;
-    }
-
-    public int getQuantidadeAtual() {
-        return quantidadeAtual;
-    }
-
-    public int getPosicaoAtual() {
-        return posicaoAtual;
     }
 }
