@@ -11,7 +11,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        // Popula o acervo com algumas músicas de teste, já que ainda não há leitura de arquivo
+        // Popula o acervo com algumas músicas de teste, já que ainda não há leitura de
+        // arquivo
         plataforma.cadastrarMusica(new Musica("Sol", "Anitta", 212));
         plataforma.cadastrarMusica(new Musica("Stitches", "Shawn Mendes", 220));
         plataforma.cadastrarMusica(new Musica("Envolver", "Anitta", 175));
@@ -158,7 +159,7 @@ public class App {
         playlists[totalPlaylists] = playlist;
         totalPlaylists++;
 
-        System.out.println("Playlist criada. Agora adicione músicas (digite -1 para parar).");
+        System.out.println("Playlist criada. Agora adicione as músicas!");
 
         int idMusica;
         do {
@@ -167,6 +168,8 @@ public class App {
                 Musica musica = plataforma.buscarMusicaPorId(idMusica);
                 if (musica == null) {
                     System.out.println("Música não encontrada!");
+                } else if (playlist.contemMusica(musica)) {
+                    System.out.println("Música já está na playlist!");
                 } else {
                     boolean sucesso = playlist.adicionar(musica);
                     if (sucesso) {

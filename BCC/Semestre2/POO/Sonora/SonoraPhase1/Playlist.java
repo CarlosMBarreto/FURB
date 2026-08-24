@@ -69,4 +69,13 @@ public class Playlist {
             musicas[i].reproduzir();
         }
     }
+
+    public boolean contemMusica(Musica musica) {
+        for (int i = 0; i < quantidade; i++) {
+            if (musicas[i].equals(musica)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
