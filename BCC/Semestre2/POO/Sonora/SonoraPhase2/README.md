@@ -72,4 +72,4 @@ java App
 
 ## ✍️ Autor
 
-**Carlin** — FURB, Departamento de Sistemas e Computação
+**Carlos Eduardo Mohr Barreto** — FURB, Ciência da Computação.
