@@ -9,6 +9,15 @@ public class Musica {
     private int reproducoes;
 
     public Musica(String titulo, String artista, int duracaoSegundos) {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            throw new IllegalArgumentException("O titulo da musica nao pode ser nulo/vazio.");
+        }
+        if (artista == null || artista.trim().isEmpty()) {
+            throw new IllegalArgumentException("O artista da musica nao pode ser nulo/vazio.");
+        }
+        if (duracaoSegundos <= 0) {
+            throw new IllegalArgumentException("Duracao invalida: " + duracaoSegundos + ". A duracao deve ser maior que zero.");
+        }
         this.id = contadorId++;
         this.titulo = titulo;
         this.artista = artista;

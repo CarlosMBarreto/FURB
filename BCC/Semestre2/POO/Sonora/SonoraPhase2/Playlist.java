@@ -8,6 +8,12 @@ public class Playlist {
     private int quantidade;
 
     public Playlist(String nome, Usuario dono) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome da playlist nao pode ser nulo/vazio.");
+        }
+        if (dono == null) {
+            throw new IllegalArgumentException("O dono da playlist nao pode ser nulo.");
+        }
         this.nome = nome;
         this.dono = dono;
         this.quantidade = 0;
@@ -27,7 +33,7 @@ public class Playlist {
 
     public boolean adicionar(Musica musica) {
         if (musica == null) {
-            return false;
+            throw new IllegalArgumentException("A musica nao pode ser nula.");
         }
         if (quantidade >= CAPACIDADE) {
             return false;
@@ -39,14 +45,14 @@ public class Playlist {
 
     public Musica getNaPosicao(int indice) {
         if (indice < 0 || indice >= quantidade) {
-            return null;
+            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (quantidade - 1) + ".");
         }
         return musicas[indice];
     }
 
     public boolean removerNaPosicao(int indice) {
         if (indice < 0 || indice >= quantidade) {
-            return false;
+            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (quantidade - 1) + ".");
         }
         for (int i = indice; i < quantidade - 1; i++) {
             musicas[i] = musicas[i + 1];
