@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FURB.iml" filepath="$PROJECT_DIR$/FURB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BCC/Semestre1/Semestre1.iml" filepath="$PROJECT_DIR$/BCC/Semestre1/Semestre1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BCC/Semestre2/POO/Sonora/Sonora.iml" filepath="$PROJECT_DIR$/BCC/Semestre2/POO/Sonora/Sonora.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BCC/Semestre2/POO/Sonora/SonoraPhase3/SonoraPhase3.iml" filepath="$PROJECT_DIR$/BCC/Semestre2/POO/Sonora/SonoraPhase3/SonoraPhase3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BCC/Semestre2/POO/Unit1/Unit1.iml" filepath="$PROJECT_DIR$/BCC/Semestre2/POO/Unit1/Unit1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BCC/Semestre2/POO/Unit1/list2/list2.iml" filepath="$PROJECT_DIR$/BCC/Semestre2/POO/Unit1/list2/list2.iml" />
+    </modules>
+  </component>
+</project>

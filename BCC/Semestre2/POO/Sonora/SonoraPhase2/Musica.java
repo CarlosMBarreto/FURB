@@ -1,3 +1,5 @@
+package BCC.Semestre2.POO.Sonora.SonoraPhase2;
+
 public class Musica {
 
     private static int contadorId = 1;
