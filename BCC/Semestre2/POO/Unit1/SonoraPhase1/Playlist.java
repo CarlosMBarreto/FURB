@@ -1,5 +1,3 @@
-package BCC.Semestre2.POO.Sonora.SonoraPhase1;
-
 public class Playlist {
 
     private static final int CAPACIDADE = 100;

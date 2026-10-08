@@ -36,6 +36,38 @@ Aqui estão exercícios, trabalhos e projetos relacionados à programação, arq
 | **Arquitetura de Computadores II** | Linguagem Assembly, microprocessadores, barramentos, chipsets e comunicação com dispositivos de entrada e saída |
 | **Lógica para Computação** | Lógica proposicional, lógica de predicados, dedução natural e formalização de problemas computacionais |
 
+## Estrutura do repositório
+
+```text
+FURB/
+├── BCC/
+│   ├── Semestre1/
+│   │   ├── ArquiteturaComputadores/   # trabalhos de numeração/conversão
+│   │   ├── IntroducaoComputacao/
+│   │   └── IntroducaoProgramacao/     # unit3 a unit7, provas e projeto final (Java)
+│   └── Semestre2/
+│       └── POO/
+│           ├── Unit1/                 # listas 1 e 2, exemplos, Sonora Fase 1 e 2
+│           ├── Unit2/                 # Sonora Fase 3 (testes JUnit)
+│           └── Unit3/                 # Sonora Fase 5 (herança, classes abstratas e final)
+└── .idea/                             # configuração do IntelliJ (módulos, JDK, JUnit)
+```
+
+## Projeto Sonora (POO)
+
+Plataforma de streaming de música simplificada, evoluída fase a fase na disciplina de Programação Orientada a Objetos.
+
+| Fase | Pasta | Foco |
+| --- | --- | --- |
+| 1 | `BCC/Semestre2/POO/Unit1/SonoraPhase1` | Estrutura de classes, vetores, encapsulamento e sobrecarga |
+| 2 | `BCC/Semestre2/POO/Unit1/SonoraPhase2` | Validações e tratamento de exceções |
+| 3 | `BCC/Semestre2/POO/Unit2/SonoraPhase3` | Planos de teste e testes automatizados com JUnit |
+| 5 | `BCC/Semestre2/POO/Unit3/SonoraPhase5` | Diagrama UML, `ArrayList`, seguir usuários, hierarquia de conteúdo (`Conteudo`, `Musica`, `Podcast`) e planos de assinatura (classes abstratas e `final`) |
+
+## Como abrir no IntelliJ IDEA
+
+Abra a pasta raiz do repositório. Cada projeto é um módulo em `.idea/modules/`, com sua própria raiz de código, porque vários exercícios usam nomes de classe repetidos (`App`, `Main`, `Pessoa`...). Os módulos com testes (Fases 3 e 5) usam o JUnit 5 que o próprio IntelliJ baixa do Maven na primeira abertura.
+
 ## Tecnologias e ferramentas
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
