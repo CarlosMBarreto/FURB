@@ -1,5 +1,3 @@
-package BCC.Semestre2.POO.Sonora.SonoraPhase2;
-
 import java.util.Scanner;
 
 public class App {

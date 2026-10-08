@@ -1,5 +1,3 @@
-package BCC.Semestre2.POO.Sonora.SonoraPhase2;
-
 public class Plataforma {
 
     private static final int CAPACIDADE = 500;
