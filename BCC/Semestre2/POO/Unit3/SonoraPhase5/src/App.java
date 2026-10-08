@@ -174,7 +174,7 @@ public class App {
         do {
             idMusica = lerInt("Id da música para adicionar (-1 para parar): ");
             if (idMusica != -1) {
-                Musica musica = plataforma.buscarMusicaPorId(idMusica);
+                Conteudo musica = plataforma.buscarMusicaPorId(idMusica);
                 if (musica == null) {
                     System.out.println("Música não encontrada!");
                 } else if (playlist.contemMusica(musica)) {
@@ -192,23 +192,23 @@ public class App {
 
     private static void buscarMusicaPorId() {
         int id = lerInt("Id da música: ");
-        Musica musica = plataforma.buscarMusicaPorId(id);
+        Conteudo musica = plataforma.buscarMusicaPorId(id);
 
         if (musica == null) {
             System.out.println("Música não encontrada.");
         } else {
-            imprimirMusica(musica);
+            imprimirConteudo(musica);
         }
     }
 
     private static void buscarMusicaPorTitulo() {
         String titulo = lerString("Título da música: ");
-        Musica musica = plataforma.buscarMusica(titulo);
+        Conteudo musica = plataforma.buscarMusica(titulo);
 
         if (musica == null) {
             System.out.println("Música não encontrada.");
         } else {
-            imprimirMusica(musica);
+            imprimirConteudo(musica);
         }
     }
 
@@ -220,7 +220,7 @@ public class App {
             }
             System.out.print("Posicao da musica na playlist: ");
             int pos = Integer.parseInt(scanner.nextLine());
-            Musica musica = playlists.get(0).getNaPosicao(pos);
+            Conteudo musica = playlists.get(0).getNaPosicao(pos);
             musica.reproduzir();
             System.out.println("Total de reproducoes de \"" + musica.getTitulo() + "\": "
                     + musica.getReproducoes());
@@ -236,7 +236,7 @@ public class App {
     private static void listarAcervo() {
         System.out.println("\n--- Acervo de músicas ---");
         for (int i = 0; i < plataforma.getTotalMusicas(); i++) {
-            imprimirMusica(plataforma.getMusicaNoAcervo(i));
+            imprimirConteudo(plataforma.getMusicaNoAcervo(i));
         }
 
         System.out.println("\n--- Usuários cadastrados ---");
@@ -409,8 +409,8 @@ public class App {
         return null;
     }
 
-    private static void imprimirMusica(Musica musica) {
-        System.out.println(musica.getId() + " - " + musica.getTitulo() + " - " + musica.getArtista()
-                + " - " + musica.getDuracaoFormatada() + " - reproduções: " + musica.getReproducoes());
+    private static void imprimirConteudo(Conteudo conteudo) {
+        System.out.println(conteudo.getId() + " - " + conteudo.getTitulo() + " - " + conteudo.getCreditos()
+                + " - " + conteudo.getDuracaoFormatada() + " - reproduções: " + conteudo.getReproducoes());
     }
 }

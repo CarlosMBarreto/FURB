@@ -4,7 +4,7 @@ public class Playlist {
 
     private String nome;
     private Usuario dono;
-    private ArrayList<Musica> musicas = new ArrayList<>();
+    private ArrayList<Conteudo> musicas = new ArrayList<>();
 
     public Playlist(String nome, Usuario dono) {
         if (nome == null || nome.trim().isEmpty()) {
@@ -29,25 +29,23 @@ public class Playlist {
         return musicas.size();
     }
 
-    public boolean adicionar(Musica musica) {
+    public boolean adicionar(Conteudo musica) {
         if (musica == null) {
             throw new IllegalArgumentException("A musica nao pode ser nula.");
         }
         return musicas.add(musica);
     }
 
-    public Musica getNaPosicao(int indice) {
+    public Conteudo getNaPosicao(int indice) {
         if (indice < 0 || indice >= musicas.size()) {
-            throw new IndexOutOfBoundsException(
-                    "Posicao invalida: " + indice + ". Indice esperado: 0 a " + (musicas.size() - 1) + ".");
+            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (musicas.size() - 1) + ".");
         }
         return musicas.get(indice);
     }
 
     public boolean removerNaPosicao(int indice) {
         if (indice < 0 || indice >= musicas.size()) {
-            throw new IndexOutOfBoundsException(
-                    "Posicao invalida: " + indice + ". Indice esperado: 0 a " + (musicas.size() - 1) + ".");
+            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (musicas.size() - 1) + ".");
         }
         musicas.remove(indice);
         return true;
@@ -55,19 +53,19 @@ public class Playlist {
 
     public int getDuracaoTotalSegundos() {
         int total = 0;
-        for (Musica musica : musicas) {
+        for (Conteudo musica : musicas) {
             total += musica.getDuracaoSegundos();
         }
         return total;
     }
 
     public void reproduzirTudo() {
-        for (Musica musica : musicas) {
+        for (Conteudo musica : musicas) {
             musica.reproduzir();
         }
     }
 
-    public boolean contemMusica(Musica musica) {
-        return musicas.contains(musica);
+    public boolean contemMusica(Conteudo conteudo) {
+        return musicas.contains(conteudo);
     }
 }

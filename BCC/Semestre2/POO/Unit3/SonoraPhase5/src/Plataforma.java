@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public class Plataforma {
 
-    private ArrayList<Musica> musicas = new ArrayList<>();
+    private ArrayList<Conteudo> musicas = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
 
-    public boolean cadastrarMusica(Musica musica) {
-        if (musica == null) {
+    public boolean cadastrarMusica(Conteudo conteudo) {
+        if (conteudo == null) {
             return false;
         }
-        musicas.add(musica);
+        musicas.add(conteudo);
         return true;
     }
 
@@ -21,19 +21,19 @@ public class Plataforma {
         return true;
     }
 
-    public Musica buscarMusicaPorId(int id) {
-        for (Musica musica : musicas) {
-            if (musica.getId() == id) {
-                return musica;
+    public Conteudo buscarMusicaPorId(int id) {
+        for (Conteudo conteudo : musicas) {
+            if (conteudo.getId() == id) {
+                return conteudo;
             }
         }
         return null;
     }
 
-    public Musica buscarMusica(String titulo) {
-        for (Musica musica : musicas) {
-            if (musica.getTitulo().equalsIgnoreCase(titulo)) {
-                return musica;
+    public Conteudo buscarMusica(String titulo) {
+        for (Conteudo conteudo : musicas) {
+            if (conteudo.getTitulo().equalsIgnoreCase(titulo)) {
+                return conteudo;
             }
         }
         return null;
@@ -47,7 +47,7 @@ public class Plataforma {
         return usuarios.size();
     }
 
-    public Musica getMusicaNoAcervo(int indice) {
+    public Conteudo getMusicaNoAcervo(int indice) {
         if (indice < 0 || indice >= musicas.size()) {
             return null;
         }
@@ -59,5 +59,13 @@ public class Plataforma {
             return null;
         }
         return usuarios.get(indice);
+    }
+
+    public double calcularReceitaMensal() {
+        double total = 0;
+        for (Usuario usuario : usuarios) {
+            total = usuario.getPlano().getMensalidade();
+        }
+        return total;
     }
 }

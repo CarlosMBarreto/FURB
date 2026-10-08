@@ -32,6 +32,8 @@ public abstract class Plano {
 
     public abstract double calcularMensalidade();
 
+    public abstract double getMensalidade();
+
     /** final: o formato do resumo e o mesmo para qualquer plano; so o calculo muda. */
     public final String resumo() {
         return nome + ": R$ " + calcularMensalidade()
