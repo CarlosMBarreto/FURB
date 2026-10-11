@@ -1,9 +1,10 @@
 /**
  * Superclasse abstrata dos planos de assinatura (generalizacao, rodada 1).
  * Guarda o que e igual nos tres planos: nome, maxDispositivos e o formato do resumo.
- * O que muda de plano para plano (mensalidade e anuncios) e abstrato.
+ * O que muda de plano para plano: temAnuncios() (abstrato aqui) e
+ * calcularMensalidade() (contrato da interface Faturavel).
  */
-public abstract class Plano {
+public abstract class Plano implements Faturavel {
 
     private String nome;
     private int maxDispositivos;
@@ -30,9 +31,8 @@ public abstract class Plano {
     // algoritmo diferente em cada plano: cada subclasse concreta decide
     public abstract boolean temAnuncios();
 
-    public abstract double calcularMensalidade();
-
-    public abstract double getMensalidade();
+    // calcularMensalidade() vem da interface Faturavel: Plano e abstrata, entao nao
+    // precisa implementar; a obrigacao desce para as subclasses concretas.
 
     /** final: o formato do resumo e o mesmo para qualquer plano; so o calculo muda. */
     public final String resumo() {

@@ -4,7 +4,7 @@ public class Playlist {
 
     private String nome;
     private Usuario dono;
-    private ArrayList<Conteudo> musicas = new ArrayList<>();
+    private ArrayList<Conteudo> itens = new ArrayList<>();
 
     public Playlist(String nome, Usuario dono) {
         if (nome == null || nome.trim().isEmpty()) {
@@ -26,46 +26,51 @@ public class Playlist {
     }
 
     public int getQuantidade() {
-        return musicas.size();
+        return itens.size();
     }
 
-    public boolean adicionar(Conteudo musica) {
-        if (musica == null) {
-            throw new IllegalArgumentException("A musica nao pode ser nula.");
+    public boolean adicionar(Conteudo conteudo) {
+        if (conteudo == null) {
+            throw new IllegalArgumentException("O conteudo nao pode ser nulo.");
         }
-        return musicas.add(musica);
+        return itens.add(conteudo);
     }
 
     public Conteudo getNaPosicao(int indice) {
-        if (indice < 0 || indice >= musicas.size()) {
-            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (musicas.size() - 1) + ".");
+        if (indice < 0 || indice >= itens.size()) {
+            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (itens.size() - 1) + ".");
         }
-        return musicas.get(indice);
+        return itens.get(indice);
     }
 
     public boolean removerNaPosicao(int indice) {
-        if (indice < 0 || indice >= musicas.size()) {
-            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (musicas.size() - 1) + ".");
+        if (indice < 0 || indice >= itens.size()) {
+            throw new IndexOutOfBoundsException("Posicao invalida: " + indice + ". Indice esperado: 0 a " + (itens.size() - 1) + ".");
         }
-        musicas.remove(indice);
+        itens.remove(indice);
         return true;
     }
 
     public int getDuracaoTotalSegundos() {
         int total = 0;
-        for (Conteudo musica : musicas) {
-            total += musica.getDuracaoSegundos();
+        for (Conteudo item : itens) {
+            total += item.getDuracaoSegundos(); // sem if: cada objeto responde do seu jeito
         }
         return total;
     }
 
     public void reproduzirTudo() {
-        for (Conteudo musica : musicas) {
-            musica.reproduzir();
+        for (Conteudo item : itens) {
+            item.reproduzir(); // tipo dinamico decide qual getCreditos() roda
         }
     }
 
+    /** Fila para o Plataforma.tocarPlaylist: copia dos itens como Reproduzivel. */
+    public ArrayList<Reproduzivel> getItensReproduziveis() {
+        return new ArrayList<Reproduzivel>(itens);
+    }
+
     public boolean contemMusica(Conteudo conteudo) {
-        return musicas.contains(conteudo);
+        return itens.contains(conteudo);
     }
 }

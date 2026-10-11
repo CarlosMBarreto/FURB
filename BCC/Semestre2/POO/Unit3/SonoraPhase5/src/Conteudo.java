@@ -1,8 +1,10 @@
 /**
  * Superclasse abstrata de tudo que o Sonora sabe reproduzir (Musica, Podcast).
  * Nao existe "conteudo generico": por isso a classe e abstrata.
+ * Implementa Reproduzivel: ja tem getDuracaoSegundos() e reproduzir(); o
+ * getDuracaoFormatada() vem pronto (default) de Cronometravel.
  */
-public abstract class Conteudo {
+public abstract class Conteudo implements Reproduzivel {
 
     private static int contador = 0;
 
@@ -38,6 +40,7 @@ public abstract class Conteudo {
         this.titulo = titulo;
     }
 
+    @Override
     public int getDuracaoSegundos() {
         return duracaoSegundos;
     }
@@ -55,12 +58,6 @@ public abstract class Conteudo {
         return reproducoes;
     }
 
-    public String getDuracaoFormatada() {
-        int minutos = duracaoSegundos / 60;
-        int segundos = duracaoSegundos % 60;
-        return String.format("%02d:%02d", minutos, segundos);
-    }
-
     /** Quem assina o conteudo (artista/album, apresentador/episodio...). */
     public abstract String getCreditos();
 
@@ -68,6 +65,7 @@ public abstract class Conteudo {
      * final: uma subclasse que sobrescrevesse e esquecesse de incrementar
      * deixaria o contador de reproducoes errado.
      */
+    @Override
     public final void reproduzir() {
         reproducoes++;
         System.out.println("Reproduzindo: " + titulo + " - " + getCreditos());

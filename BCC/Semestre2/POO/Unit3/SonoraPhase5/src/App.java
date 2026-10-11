@@ -56,6 +56,27 @@ public class App {
                     case 13:
                         demonstrarConteudos();
                         break;
+                    case 14:
+                        cadastrarPodcast();
+                        break;
+                    case 15:
+                        cadastrarAnuncio();
+                        break;
+                    case 16:
+                        adicionarPodcastAPlaylist();
+                        break;
+                    case 17:
+                        tocarPlaylistParaUsuario();
+                        break;
+                    case 18:
+                        listarEpisodiosDeApresentador();
+                        break;
+                    case 19:
+                        exibirReceitaMensal();
+                        break;
+                    case 20:
+                        demonstrarPolimorfismoEReceita();
+                        break;
                     case 0:
                         System.out.println("Encerrando o Sonora...");
                         scanner.close();
@@ -71,6 +92,9 @@ public class App {
             } catch (NoSuchElementException e) {
                 System.out.println("Entrada encerrada. Encerrando o Sonora...");
                 return;
+            } catch (RuntimeException e) {
+                // rede de seguranca: o menu nunca pode quebrar
+                System.out.println("Erro inesperado: " + e.getMessage());
             }
         }
     }
@@ -90,6 +114,13 @@ public class App {
         System.out.println("11 - Trocar plano de um usuário");
         System.out.println("12 - Exibir resumo do plano de um usuário");
         System.out.println("13 - Demonstração: músicas e podcasts");
+        System.out.println("14 - Cadastrar podcast");
+        System.out.println("15 - Cadastrar anúncio");
+        System.out.println("16 - Adicionar um podcast a uma playlist");
+        System.out.println("17 - Tocar uma playlist para um usuário");
+        System.out.println("18 - Listar episódios de um apresentador");
+        System.out.println("19 - Exibir receita mensal da plataforma");
+        System.out.println("20 - Demonstração: polimorfismo e receita");
         System.out.println("0 - Sair");
     }
 
@@ -397,6 +428,140 @@ public class App {
         System.out.println(bohemian.getTitulo() + ": " + bohemian.getReproducoes());
         System.out.println(imagine.getTitulo() + ": " + imagine.getReproducoes());
         System.out.println(podcast.getTitulo() + ": " + podcast.getReproducoes());
+    }
+
+    private static void cadastrarPodcast() {
+        String titulo = lerString("Título do episódio: ");
+        String apresentador = lerString("Apresentador: ");
+        int duracao = lerInt("Duração em segundos: ");
+        int numero = lerInt("Número do episódio: ");
+
+        Podcast podcast = new Podcast(titulo, duracao, apresentador, numero);
+        plataforma.cadastrarMusica(podcast);
+        System.out.println("Podcast cadastrado com id " + podcast.getId());
+    }
+
+    private static void cadastrarAnuncio() {
+        String anunciante = lerString("Anunciante: ");
+        String titulo = lerString("Título do anúncio: ");
+        int duracao = lerInt("Duração em segundos: ");
+        double valor = lerDouble("Valor por mil impressões (R$): ");
+
+        Anuncio anuncio = new Anuncio(anunciante, titulo, duracao, valor);
+        plataforma.cadastrarAnuncio(anuncio);
+        System.out.println("Anúncio cadastrado: " + anuncio);
+    }
+
+    private static Playlist escolherPlaylist() {
+        if (playlists.isEmpty()) {
+            System.out.println("Nenhuma playlist cadastrada.");
+            return null;
+        }
+        for (int i = 0; i < playlists.size(); i++) {
+            System.out.println(i + " - " + playlists.get(i).getNome() + " (dono: "
+                    + playlists.get(i).getDono().getNome() + ")");
+        }
+        int indice = lerInt("Número da playlist: ");
+        if (indice < 0 || indice >= playlists.size()) {
+            System.out.println("Playlist inválida.");
+            return null;
+        }
+        return playlists.get(indice);
+    }
+
+    private static void adicionarPodcastAPlaylist() {
+        Playlist playlist = escolherPlaylist();
+        if (playlist == null) {
+            return;
+        }
+        int id = lerInt("Id do podcast: ");
+        Conteudo conteudo = plataforma.buscarMusicaPorId(id);
+        if (conteudo == null) {
+            System.out.println("Conteúdo não encontrado!");
+        } else if (!(conteudo instanceof Podcast)) {
+            System.out.println("O conteúdo " + id + " não é um podcast.");
+        } else if (playlist.contemMusica(conteudo)) {
+            System.out.println("Já está na playlist!");
+        } else {
+            playlist.adicionar(conteudo);
+            System.out.println("Podcast adicionado a \"" + playlist.getNome() + "\"!");
+        }
+    }
+
+    private static void tocarPlaylistParaUsuario() {
+        Playlist playlist = escolherPlaylist();
+        if (playlist == null) {
+            return;
+        }
+        int idOuvinte = lerInt("Id do ouvinte: ");
+        Usuario ouvinte = buscarUsuarioPorId(idOuvinte);
+        if (ouvinte == null) {
+            System.out.println("Usuário não encontrado!");
+            return;
+        }
+        plataforma.tocarPlaylist(ouvinte, playlist);
+    }
+
+    private static void listarEpisodiosDeApresentador() {
+        String apresentador = lerString("Apresentador: ");
+        plataforma.listarEpisodiosDe(apresentador);
+    }
+
+    private static void exibirReceitaMensal() {
+        System.out.println(String.format("Receita mensal da plataforma: R$ %.2f",
+                plataforma.calcularReceitaMensal()));
+    }
+
+    private static void demonstrarPolimorfismoEReceita() {
+        // Plataforma propria da demonstracao, para nao misturar com os dados do menu
+        Plataforma demo = new Plataforma();
+
+        // B3: variavel polimorfica
+        Conteudo c = new Podcast("Polimorfismo na pratica", 1500, "Ana Souza", 3);
+        // Tipo estatico de c: Conteudo (o que esta escrito na declaracao, decidido na compilacao).
+        // Tipo dinamico de c: Podcast (o objeto criado com new, decidido na execucao).
+        // c.getApresentador();
+        // Nao compila: o compilador so olha o tipo ESTATICO. Conteudo nao tem
+        // getApresentador(); esse metodo so existe em Podcast. Mesmo o objeto sendo
+        // um Podcast, a variavel c so "enxerga" o que Conteudo declara. Para usar,
+        // seria preciso o downcast: ((Podcast) c).getApresentador().
+        System.out.println("c.getCreditos() (tipo dinamico decide): " + c.getCreditos());
+
+        Musica m1 = new Musica("Bohemian Rhapsody", 354, "Queen", "A Night at the Opera");
+        Musica m2 = new Musica("Imagine", 183, "John Lennon", "Imagine");
+        Podcast p2 = new Podcast("Heranca sem medo", 1800, "Ana Souza", 4);
+        demo.cadastrarMusica(m1);
+        demo.cadastrarMusica(m2);
+        demo.cadastrarMusica(c);
+        demo.cadastrarMusica(p2);
+
+        Usuario gratis = new Usuario("Gabi", "gabi@email.com");
+        Usuario individual = new Usuario("Rui", "rui@email.com");
+        individual.assinar(new PlanoIndividual(21.90));
+        Usuario familia = new Usuario("Fam", "fam@email.com");
+        familia.assinar(new PlanoFamilia(34.90, 3));
+        demo.cadastrarUsuario(gratis);
+        demo.cadastrarUsuario(individual);
+        demo.cadastrarUsuario(familia);
+
+        demo.cadastrarAnuncio(new Anuncio("Torrefacao Serrana", "Cafe da Serra", 15, 50.0));
+        demo.cadastrarAnuncio(new Anuncio("Tenis Veloz", "Corra mais", 20, 80.0));
+
+        Playlist mix = new Playlist("Mix", gratis);
+        mix.adicionar(m1);
+        mix.adicionar(c);
+        mix.adicionar(m2);
+        mix.adicionar(p2);
+        System.out.println("\nPlaylist mista: " + mix.getQuantidade() + " itens, "
+                + mix.getDuracaoTotalSegundos() + "s no total.");
+
+        System.out.println("\nEpisodios de Ana Souza:");
+        demo.listarEpisodiosDe("Ana Souza");
+
+        System.out.println(String.format("\nReceita mensal ANTES: R$ %.2f", demo.calcularReceitaMensal()));
+        System.out.println();
+        demo.tocarPlaylist(gratis, mix);
+        System.out.println(String.format("\nReceita mensal DEPOIS: R$ %.2f", demo.calcularReceitaMensal()));
     }
 
     private static Usuario buscarUsuarioPorId(int id) {
