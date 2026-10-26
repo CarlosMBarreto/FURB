@@ -1,4 +1,4 @@
-package BCC.Semestre2.POO.SetupGamer;
+package BCC.Semestre2.POO.RevisaoProva.SetupGamer;
 
 public class Cliente {
     private String nome;
@@ -14,6 +14,6 @@ public class Cliente {
     }
 
     public String getCpf(){
-        return nome;
+        return cpf;
     }
 }
