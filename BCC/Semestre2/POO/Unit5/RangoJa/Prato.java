@@ -2,12 +2,12 @@ package BCC.Semestre2.POO.Unit5.RangoJa;
 
 public class Prato extends ItemCardapio {
 
-    private char tamanho;
+    private final char tamanho;
 
     public Prato(String nome, double precoBase, char tamanho) {
         super(nome, precoBase);
         if (tamanho != 'P' && tamanho != 'M' && tamanho != 'G') {
-            throw new IllegalArgumentException("Tamanho inválido: use 'P', 'M' ou 'G'.");
+            throw new IllegalArgumentException("Tamanho deve ser P, M ou G");
         }
         this.tamanho = tamanho;
     }
@@ -16,7 +16,6 @@ public class Prato extends ItemCardapio {
         return tamanho;
     }
 
-    // P = preço base; M = +30%; G = +60%
     @Override
     public double calcularPreco() {
         switch (tamanho) {

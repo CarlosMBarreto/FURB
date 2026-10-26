@@ -2,14 +2,16 @@ package BCC.Semestre2.POO.Unit5.RangoJa;
 
 public class Bebida extends ItemCardapio {
 
-    private static final double ACRESCIMO_LACRE = 3.00;
+    private static final double ACRESCIMO_ALCOOLICA = 3.00;
 
-    private int volumeMl;
-    private boolean alcoolica;
+    private final int volumeMl;
+    private final boolean alcoolica;
 
     public Bebida(String nome, double precoBase, int volumeMl, boolean alcoolica) {
         super(nome, precoBase);
-        validarPositivo(volumeMl);
+        if (volumeMl <= 0) {
+            throw new IllegalArgumentException("Volume deve ser positivo");
+        }
         this.volumeMl = volumeMl;
         this.alcoolica = alcoolica;
     }
@@ -22,21 +24,13 @@ public class Bebida extends ItemCardapio {
         return alcoolica;
     }
 
-    // Bebida alcoólica tem acréscimo de R$ 3,00 pela embalagem com lacre.
     @Override
     public double calcularPreco() {
-        if (alcoolica) {
-            return getPrecoBase() + ACRESCIMO_LACRE;
-        }
-        return getPrecoBase();
+        return alcoolica ? getPrecoBase() + ACRESCIMO_ALCOOLICA : getPrecoBase();
     }
 
     @Override
     public String toString() {
-        String texto = super.toString() + " (" + volumeMl + " ml)";
-        if (alcoolica) {
-            texto += " [alcoólica]";
-        }
-        return texto;
+        return super.toString() + " (" + volumeMl + " ml)" + (alcoolica ? " [alcoólica]" : "");
     }
 }
